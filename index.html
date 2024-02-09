@@ -9,22 +9,42 @@
     </head>
 
     <body>
-        <div class="cells">
-            <div class="row row0">
-                <button data-row="0" data-col="0"></button>
-                <button data-row="0" data-col="1"></button>
-                <button data-row="0" data-col="2"></button>
+        <section class="top">
+            <h1>Tic-Tac-Toe</h1>
+        </section>
+
+        <section class="middle">
+            <div class="holder p1-score-holder">
+                <p class="p1-name"></p>
+                <p class="p1-score"></p>
             </div>
-            <div class="row row1">
-                <button data-row="1" data-col="0"></button>
-                <button data-row="1" data-col="1"></button>
-                <button data-row="1" data-col="2"></button>
+            <div class="board">
+                <div class="cells">
+                    <div class="row row0">
+                        <button data-row="0" data-col="0"></button>
+                        <button data-row="0" data-col="1"></button>
+                        <button data-row="0" data-col="2"></button>
+                    </div>
+                    <div class="row row1">
+                        <button data-row="1" data-col="0"></button>
+                        <button data-row="1" data-col="1"></button>
+                        <button data-row="1" data-col="2"></button>
+                    </div>
+                    <div class="row row2">
+                        <button data-row="2" data-col="0"></button>
+                        <button data-row="2" data-col="1"></button>
+                        <button data-row="2" data-col="2"></button>
+                    </div>
+                </div>
             </div>
-            <div class="row row2">
-                <button data-row="2" data-col="0"></button>
-                <button data-row="2" data-col="1"></button>
-                <button data-row="2" data-col="2"></button>
+            <div class="holder p2-score-holder">
+                <p class="p2-name"></p>
+                <p class="p2-score"></p>
             </div>
-        </div>
+        </section>
+
+        <section class="bottom">
+            <button class="restart-button">Restart</button>
+        </section>
     </body>
 </html>

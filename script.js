@@ -1,6 +1,7 @@
 function Player(name, mark) {
     this.name = name
-    this.mark = mark
+    this.mark = mark,
+    this.score = 0
 }
 
 function Gameboard() {
@@ -64,13 +65,18 @@ function GameController(player1, player2) {
 
     const FinishGame = () => {
         isFinished = true;
+        activePlayer.score += 1;
         console.log(`Winner is ${activePlayer.name}!`);
     }
 
     const RestartGame = () => {
         isFinished = false;
-        board.board.ResetBoard();
+        board.ResetBoard();
         activePlayer = _player1;
+    }
+
+    const GetPlayers = () => {
+        return [_player1, _player2];
     }
 
     const CheckWin = (row, col) => {
@@ -108,13 +114,31 @@ function GameController(player1, player2) {
         return d1 || d2;
     }
 
-    return {PlayRound, IsFinished, GetActivePlayer, CheckIfPlacable, RestartGame}
+    return {PlayRound, IsFinished, GetActivePlayer, CheckIfPlacable, RestartGame, GetPlayers}
 }
 
 function DOMController(gameController) {
     const _gameController = gameController;
 
+    const p1Name = document.querySelector(".p1-name");
+    const p1Score = document.querySelector(".p1-score");
+    
+    const p2Name = document.querySelector(".p2-name");
+    const p2Score = document.querySelector(".p2-score");
+    
+    const restartButton = document.querySelector(".restart-button");
     const cells = document.querySelectorAll(".cells button");
+
+    p1Name.textContent = _gameController.GetPlayers()[0].name;
+    p1Score.textContent = _gameController.GetPlayers()[0].score;
+
+    p2Name.textContent = _gameController.GetPlayers()[1].name;
+    p2Score.textContent = _gameController.GetPlayers()[1].score;
+    
+    restartButton.addEventListener('click', (event) => {
+        _gameController.RestartGame();
+        ClearCells();
+    })
 
     cells.forEach(cell => {
         cell.addEventListener('click', (event) => {
@@ -126,18 +150,25 @@ function DOMController(gameController) {
             if (!gameController.CheckIfPlacable(row, col)) return;
 
             cell.textContent = _gameController.GetActivePlayer().mark;
+            cell.style.color = _gameController.GetActivePlayer().mark == "X" ? "salmon" : "lightskyblue";
             _gameController.PlayRound(row, col);
+
+            if (_gameController.IsFinished()) UpdateScores();
         })
     });
 
     const ClearCells = () => {
         cells.forEach(cell => {
             cell.textContent = "";
-        });
+        })};
+
+    const UpdateScores = () => {
+        p1Score.textContent = _gameController.GetPlayers()[0].score;
+        p2Score.textContent = _gameController.GetPlayers()[1].score;
     }
 }
 
-player1 = new Player("Eren", "X");
+player1 = new Player("P1", "X");
 player2 = new Player("P2", "O");
 
 let game = GameController(player1, player2);
