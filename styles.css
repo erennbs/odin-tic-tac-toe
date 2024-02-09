@@ -1,0 +1,39 @@
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100%;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.cells {
+    background-color: black;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+}
+
+.cells button {
+    background-color: white;
+    border: none;
+
+    width: 150px;
+    height: 150px;
+
+    font-size: 70px;
+}
+
+.cells button:hover {
+    background-color: whitesmoke;
+}
+
+.row {
+    display: flex;
+    gap: 5px;
+}
